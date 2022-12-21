@@ -16,10 +16,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "bin": {
-    "index": ""
-  },
+  "bin": "./build/cjs/cli.js",
   "scripts": {
+    "dev": "./build/cjs/cli.js start",
     "build": "npm run clean && npm run type:dts && npm run build:main",
     "build:main": "node -r ./esbuild-hook ./scripts/build",
     "clean": "node -r ./esbuild-hook ./scripts/clean",
@@ -45,8 +44,10 @@
     "@semantic-release/github": "^8.0.7",
     "@semantic-release/npm": "^9.0.1",
     "@semantic-release/release-notes-generator": "^10.0.3",
+    "@types/js-yaml": "^4.0.5",
     "@types/node": "^18.11.17",
     "@types/prompts": "^2.4.2",
+    "@types/split2": "^3.2.1",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
     "c8": "^7.12.0",
@@ -66,5 +67,12 @@
   },
   "overrides": {
     "semver-regex": "3.1.4"
+  },
+  "dependencies": {
+    "commander": "^9.4.1",
+    "js-yaml": "^4.1.0",
+    "pino": "^8.8.0",
+    "pino-pretty": "^9.1.1",
+    "split2": "^4.1.0"
   }
 }
