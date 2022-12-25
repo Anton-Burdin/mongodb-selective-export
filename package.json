@@ -1,6 +1,6 @@
 {
   "name": "mongodb-selective-export",
-  "version": "0.0.0-development",
+  "version": "0.0.1",
   "main": "./build/cjs/index.js",
   "module": "./build/esm/index.js",
   "types": "./build/src/index.d.ts",
