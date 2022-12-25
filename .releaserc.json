@@ -14,7 +14,7 @@
       "prerelease": true
     }
   ],
-  "repositoryUrl": "https://github.com/ABurdin/mongodb-selective-export.git",
+  "repositoryUrl": "https://github.com/Anton-Burdin/mongodb-selective-export.git",
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
