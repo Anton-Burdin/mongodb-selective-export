@@ -4,6 +4,10 @@
   "main": "./build/cjs/index.js",
   "module": "./build/esm/index.js",
   "types": "./build/src/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Anton-Burdin/mongodb-selective-export.git"
+  },
   "license": "MIT",
   "engines": {
     "node": "^18.7.0 || >= 16",
