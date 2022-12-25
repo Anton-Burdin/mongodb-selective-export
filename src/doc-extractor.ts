@@ -16,7 +16,7 @@ export const extractObjectIdsFromDocument = <T extends Record<string, unknown>>(
   ];
 
   while (fieldsForScan.length) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { path: parentPath, obj } = fieldsForScan.pop()!;
 
     Object.keys(obj).forEach((key) => {

@@ -46,19 +46,24 @@ export const exportDocumentsFromCollection = (
     );
 
     // Readline
-    ls.stdout.pipe(split2(JSON.parse), )
-        .on("data",  (doc: IDoc) => {
-          totalCount++;
+    ls.stdout
+      .pipe(split2(JSON.parse))
+      .on("data", (doc: IDoc) => {
+        totalCount++;
 
-          if (!documentDeduplicator.has(`${collection}.${ObjectId.toString(doc._id)}`)) {
-            payloadCount++;
-            eachNewDocCb(doc);
-            writeStream.write(`${JSON.stringify(doc)}\n`);
-          }
-        })
-        .on("error", (e) => {
-          logger.error(e);
-    });
+        if (
+          !documentDeduplicator.has(
+            `${collection}.${ObjectId.toString(doc._id)}`
+          )
+        ) {
+          payloadCount++;
+          eachNewDocCb(doc);
+          writeStream.write(`${JSON.stringify(doc)}\n`);
+        }
+      })
+      .on("error", (e) => {
+        logger.error(e);
+      });
 
     ls.on("exit", (code) => {
       if (Number(code) === 1) {
@@ -67,7 +72,7 @@ export const exportDocumentsFromCollection = (
         });
       }
       logger.info(
-          `Exported ${collection}: payloadCount: ${payloadCount} totalCount: ${totalCount}`
+        `Exported ${collection}: payloadCount: ${payloadCount} totalCount: ${totalCount}`
       );
       writeStream.end();
       resolve();
@@ -81,7 +86,7 @@ export interface IExportQuery {
 }
 
 export const formExportQueriesFromCollectionRelations = (
-  collectionRelations: IDocRelation[],
+  collectionRelations: IDocRelation[]
 ): IExportQuery[] => {
   // grouped and deduplicate queries
   const groupedQueries = collectionRelations.reduce<
@@ -89,10 +94,10 @@ export const formExportQueriesFromCollectionRelations = (
   >((acc, docRelation) => {
     const { collection, path: filed, value } = docRelation;
     const groupByCollection =
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       acc[collection] || (acc[collection] = {} as Record<string, string[]>);
     const groupByFiled =
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       groupByCollection[filed] || (groupByCollection[filed] = [] as string[]);
 
     if (!groupByFiled.find((v) => v === value)) {
@@ -110,7 +115,7 @@ export const formExportQueriesFromCollectionRelations = (
     }));
 
     const query =
-        fieldQueries.length === 1 ? fieldQueries[0] : { $or: fieldQueries };
+      fieldQueries.length === 1 ? fieldQueries[0] : { $or: fieldQueries };
 
     return {
       collection,
