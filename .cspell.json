@@ -5,9 +5,11 @@
     "degit",
     "esbuild",
     "mongodb-selective-export",
-    "octocat",
+    "mongoexport",
     "rmrf",
-    "socio"
+    "octocat",
+    "pino",
+    "Deduplicator"
   ],
   "flagWords": [],
   "ignorePaths": [

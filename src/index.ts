@@ -31,7 +31,7 @@ export const runExport = async (
   const loadedDocuments = new Set<string>(); // collection._id
 
   // read yaml
-  const relationsData = await loadSRelationSchema(ymlFile, logger);
+  const relationsData = await loadSRelationSchema(ymlFile);
   const relationSchema = formReversRelationSchema(relationsData, logger);
 
   const collectionsFolder = `${exportFolder}/collections`;
@@ -47,6 +47,7 @@ export const runExport = async (
   }
 
   while (queriesInProgress.length) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { query, collection } = queriesInProgress.pop()!;
     const collectionRelations: IDocRelation[] = [];
 

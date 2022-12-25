@@ -9,13 +9,13 @@ Export only required documents from the Mongodb.
 
 ## Getting started
 
-1. `npx mongodb-selective-export export --relations=[path] --entirypoints=[contiditonal]`
+1. `npx mongodb-selective-export export --relations=[path] --entryPoints=[conditional]`
 
 Available commands:
 
 - `export`: export documents from db
 
-## Roadmap
+## Road map
 
 1. Test coverage
 2. Array in array oid

@@ -6,7 +6,7 @@ const isPrimitive = (inputValue: unknown) => inputValue !== Object(inputValue);
 const isString = (str: unknown) =>
   str !== undefined && str !== null && typeof str.valueOf() === "string";
 
-export const extractObjectIdsFromDocument = <T extends Record<string, any>>(
+export const extractObjectIdsFromDocument = <T extends Record<string, unknown>>(
   document: T
 ) => {
   const output: { path: string; id: string }[] = [];
@@ -16,6 +16,7 @@ export const extractObjectIdsFromDocument = <T extends Record<string, any>>(
   ];
 
   while (fieldsForScan.length) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { path: parentPath, obj } = fieldsForScan.pop()!;
 
     Object.keys(obj).forEach((key) => {

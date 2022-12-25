@@ -18,7 +18,7 @@
   },
   "bin": "./build/cjs/cli.js",
   "scripts": {
-    "dev": "./build/cjs/cli.js start",
+    "dev": "npm run build && ./build/cjs/cli.js export",
     "build": "npm run clean && npm run type:dts && npm run build:main",
     "build:main": "node -r ./esbuild-hook ./scripts/build",
     "clean": "node -r ./esbuild-hook ./scripts/clean",

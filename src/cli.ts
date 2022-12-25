@@ -6,6 +6,7 @@ import { runExport } from "./index";
 const bootstrap = () => {
   program
     .version(
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-var-requires
       require("../package.json").version,
       "-v, --version",
       "Output the current version."
@@ -13,7 +14,8 @@ const bootstrap = () => {
     .usage("<command> [options]")
     .helpOption("-h, --help", "Output usage information.");
 
-  program.command("start").action((str, option) => {
+  program.command("export").action(() => {
+    // str, option
     const mongoUri = "";
 
     return runExport(

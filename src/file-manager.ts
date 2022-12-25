@@ -15,11 +15,12 @@ export const loadExportedDocuments = async (
   const collections = await readdir(collectionsFolder);
 
   for (const collection of collections) {
-    await new Promise<void>((resolve, reject) => {
+    await new Promise<void>((resolve) => {
       createReadStream(join(collectionsFolder, collection), { autoClose: true })
         .pipe(split2(JSON.parse))
         .on("data", (doc: IDoc) => eachDoc(collection, doc))
         .on("end", () => resolve())
+        // TODO: improve
         .on("error", (error) => logger.error(error));
     });
   }
@@ -47,12 +48,7 @@ export const saveQueries = async (
   });
 };
 
-export const loadSRelationSchema = async (
-  ymlFile: string,
-  parentLogger: Logger
-) => {
-  const logger = parentLogger.child({});
-
+export const loadSRelationSchema = async (ymlFile: string) => {
   const ymlContent = await readFile(ymlFile, "utf8");
   const data = yaml.load(ymlContent) as Record<string, IRelation[]>;
 

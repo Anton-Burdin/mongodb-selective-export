@@ -23,6 +23,7 @@ const addRel = (
   if (!relations.has(collection)) {
     relations.set(collection, [rel]);
   } else {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const collectionRelations = relations.get(collection)!;
     // is not already exist
     const result = collectionRelations.find(
@@ -33,9 +34,9 @@ const addRel = (
     } else if (result.toField !== rel.toField) {
       collectionRelations.push(rel);
       logger.warn(
-        `Two similar relation ${collection}.${result.field!}-${
+        `Two similar relation ${collection}.${String(result.field)}-${
           result.to
-        }[${result.toField!}|${rel.toField!}]`
+        }[${String(result.toField)}|${String(rel.toField)}]`
       );
     }
   }
@@ -59,7 +60,7 @@ export const formReversRelationSchema = (
   const relations = new Map<string, IRelation[]>();
 
   Object.keys(data).forEach((collection: string) => {
-    const collectionRelations = data[collection]!;
+    const collectionRelations = data[collection];
 
     collectionRelations.forEach((rel) => {
       const directCollection = collection;

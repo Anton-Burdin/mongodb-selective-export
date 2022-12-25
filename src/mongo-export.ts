@@ -1,6 +1,5 @@
 import { spawn } from "child_process";
 import { createWriteStream } from "fs";
-// import { Readable } from 'node:stream';
 import { Logger } from "pino";
 import split2 from "split2";
 import { IDocRelation } from "./doc-extractor";
@@ -34,7 +33,7 @@ export const exportDocumentsFromCollection = (
   let totalCount = 0;
   let payloadCount = 0;
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const ls = spawn("mongoexport", [
       `-c=${collection}`,
       `--query=${query}`,
@@ -46,7 +45,7 @@ export const exportDocumentsFromCollection = (
       { flags: "a" } // append
     );
 
-    // Readable
+    // Readline
     ls.stdout.pipe(split2(JSON.parse), )
         .on("data",  (doc: IDoc) => {
           totalCount++;
@@ -90,8 +89,10 @@ export const formExportQueriesFromCollectionRelations = (
   >((acc, docRelation) => {
     const { collection, path: filed, value } = docRelation;
     const groupByCollection =
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       acc[collection] || (acc[collection] = {} as Record<string, string[]>);
     const groupByFiled =
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       groupByCollection[filed] || (groupByCollection[filed] = [] as string[]);
 
     if (!groupByFiled.find((v) => v === value)) {
