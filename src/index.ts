@@ -20,14 +20,14 @@ const collectionDocToSignature = (collection: string, doc: IDoc) =>
   `${collection}.${ObjectId.toString(doc._id)}`;
 
 export const runExport = async (
-  entryPoint: IExportQuery,
+  entryPoints: IExportQuery[],
   mongoUri: string,
   exportFolder: string,
   ymlFile: string
 ) => {
   const logger = pino(pretty({ hideObject: true }));
 
-  const queriesInProgress: IExportQuery[] = [entryPoint];
+  const queriesInProgress: IExportQuery[] = [...entryPoints];
   const loadedDocuments = new Set<string>(); // collection._id
 
   // read yaml
