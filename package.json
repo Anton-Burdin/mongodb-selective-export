@@ -38,7 +38,8 @@
     "test:setup": "node -r ./esbuild-hook ./scripts/testSetup",
     "spell:check": "cspell \"{README.md,CODE_OF_CONDUCT.md,CONTRIBUTING.md,.github/*.md,src/**/*.ts}\"",
     "cz": "cz",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@ryansonshine/commitizen": "^4.2.8",
@@ -62,6 +63,7 @@
     "eslint-import-resolver-typescript": "^3.5.2",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.26.0",
+    "husky": "^8.0.2",
     "nyc": "^15.1.0",
     "prettier": "^2.8.1",
     "semantic-release": "^19.0.5",
